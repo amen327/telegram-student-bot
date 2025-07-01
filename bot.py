@@ -3,8 +3,9 @@ import pandas as pd
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 
-# تحميل ملف الإكسل مرة واحدة
+# تحميل ملف الإكسل وإزالة الفراغات من أسماء الأعمدة
 df = pd.read_excel("sabahi.xlsx")
+df.columns = df.columns.str.strip()  # إزالة الفراغات من أسماء الأعمدة
 df["كود الطالب"] = df["كود الطالب"].astype(str)
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -17,7 +18,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not result.empty:
         row = result.iloc[0]
         name = row.get("اسم الطالب", "غير معروف")
-        student_id = row.get("id", row.get("ID", "غير معروف"))
+        student_id = row.get("id", "غير معروف")
         password = row.get("الرقم السري", "غير معروف")
 
         response = (
