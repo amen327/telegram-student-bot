@@ -31,7 +31,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(response, parse_mode="Markdown")
 
 def main():
-    app = ApplicationBuilder().token("7923983055:AAEc9j_hGp1Qq_3ehoaVSPXP2LKNBlk9oMw").build()
+    app = ApplicationBuilder().token("7562170232:AAHTszLeqOFBmOXY_MfJSJQaWUviZ78n07Y").build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     print("Bot is running...")
