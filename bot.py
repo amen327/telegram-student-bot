@@ -16,9 +16,9 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if not result.empty:
         row = result.iloc[0]
-        name = row["اسم الطالب"]
-        student_id = row["id"]
-        password = row["الرقم السري"]
+        name = row.get("اسم الطالب", "غير معروف")
+        student_id = row.get("id", row.get("ID", "غير معروف"))
+        password = row.get("الرقم السري", "غير معروف")
 
         response = (
             f"👤 *اسم الطالب:* {name}\n"
